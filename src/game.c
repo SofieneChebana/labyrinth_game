@@ -1,6 +1,6 @@
 #define SDL_MAIN_HANDLED
 #include "include/SDL2/SDL.h"
-#include "include/SDL2/SDL_ttf.h"
+#include "include/SDL2/SDL_mixer.h"
 #include <stdio.h>
 #include "labyrinth.h"
 #include "audio.h"
@@ -18,8 +18,9 @@ void playUI(){
     return;
     }
 
-    if (audio_init() == -1){
-        return;
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0){
+        printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
+        exit(EXIT_FAILURE);
     }
 
     SDL_Window * window = SDL_CreateWindow("Labyrinthe", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WINDOW_WIDTH, WINDOW_HEIGHT, 0);
@@ -140,6 +141,9 @@ void playUI(){
 
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
+    Mix_CloseAudio();
+    Mix_Quit();
+
     SDL_Quit();
 
     
