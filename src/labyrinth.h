@@ -3,8 +3,6 @@
 
 char** init_labyrinth();
 
-void display(char** labyrinth);
-
 void load_level(char** labyrinth, char* level);
 
 int* find_player(char** labyrinth);

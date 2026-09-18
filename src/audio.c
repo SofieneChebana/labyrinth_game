@@ -23,7 +23,6 @@ void walk(){
     printf(fullPath);
     Mix_Chunk* sound = Mix_LoadWAV(fullPath);
 
-    //Mix_Chunk* sound = Mix_LoadWAV("./assets/sounds/walk.wav");
     if (sound == NULL){
         printf("Failed to load sound effect! SDL_mixer Error: %s\n", Mix_GetError());
         exit(EXIT_FAILURE);
@@ -56,7 +55,6 @@ void level_start(){
     printf(fullPath);
     Mix_Chunk* sound = Mix_LoadWAV(fullPath);
 
-    //Mix_Chunk* sound = Mix_LoadWAV("./assets/sounds/start.wav");
     if (sound == NULL){
         printf("Failed to load sound effect! SDL_mixer Error: %s\n", Mix_GetError());
         exit(EXIT_FAILURE);

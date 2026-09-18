@@ -16,16 +16,6 @@ char** init_labyrinth(){
     return labyrinth;
 }
 
-void display(char** labyrinth){
-     
-    for(int i =0;i<HEIGTH;i++){
-        printf("\n");
-        for(int j=0;j<WIDTH;j++){
-            printf("%c ", labyrinth[i][j]);
-        }
-    }
-}
-
 void load_level(char** labyrinth,char* level){
     FILE* file = fopen(level,"r");
     if(file == NULL){
@@ -123,11 +113,6 @@ void move(char** labyrinth, char direction){
             labyrinth[row][col+1] = 'x';
         }
     }
-    /*
-    else{
-        fprintf(stderr, "\nError, Choose an appropriate Direction : ");
-    }
-        */
 
 }
 
@@ -136,32 +121,4 @@ int distance(int x1, int y1, int x2, int y2 ){
     return (int) sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
 }
 
-/*
-void play(){
-    char** labyrinth = init_labyrinth();
-    load_level(labyrinth,"levels/1.txt");
 
-
-    int* goal = find_goal(labyrinth);
-    int x = goal[0];
-    int y = goal[1];
-    free(goal);
-    printf("\n");
-    
-    while(labyrinth[x][y] =='1'){
-        display(labyrinth);
-        move(labyrinth);
-    } 
-
-    display(labyrinth);
-    printf("Congratulations !");
-
-    for(int i =0;i<HEIGTH;i++){
-        free(labyrinth[i]);
-
-    }
-
-    free(labyrinth);
-
-}  
-    */

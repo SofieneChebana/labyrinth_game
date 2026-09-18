@@ -28,7 +28,7 @@ void playUI(){
     SDL_Event event;
     int run = 1;
     
-    //Creation du labyrinthe
+    //Init:
     char** labyrinth = init_labyrinth();
 
     char level_path[20];
@@ -42,15 +42,14 @@ void playUI(){
     int goal_y = goal[1];
 
     level_start();
-    //Boucle principale
+
+    //Main Loop:
     while(run){
 
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
 
-        //make_label(renderer, level, level_path);
-            
-        // Dessiner le labyrinthe
+
         for (int i = 0; i < HEIGHT; ++i) {
             for (int j = 0; j < WIDTH; ++j) {
                 SDL_Rect rect;
@@ -69,19 +68,19 @@ void playUI(){
                 //else{
                     switch (labyrinth[i][j]) {
                         case '|': // Mur
-                            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // Noir
+                            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // Black
                             SDL_RenderFillRect(renderer, &rect);
                             break;
                         case 'x': // Joueur
-                            SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Rouge
+                            SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Red
                             SDL_RenderFillRect(renderer, &rect);
                             break;
                         case '1': // But
-                            SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255); // Vert
+                            SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255); // Green
                             SDL_RenderFillRect(renderer, &rect);
                             break;
                         case ' ': // Espace vide
-                            SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // Blanc
+                            SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // White
                             SDL_RenderFillRect(renderer, &rect);
                             break;
                     }
@@ -107,7 +106,7 @@ void playUI(){
 
         while (SDL_PollEvent(&event) != 0) {
             if (event.type == SDL_QUIT){
-                run = 0; // Marquer pour quitter la boucle
+                run = 0;
             }
 
             if(event.type == SDL_KEYDOWN){
@@ -150,37 +149,6 @@ void playUI(){
     
 }
 
-/*void make_label(SDL_Renderer renderer, int level, char level_str){
-    if(TTF_Init()==-1){
-                SDL_Quit();
-            }
-            TTF_Font* font = TTF_OpenFont("./assets/fonts/regular.ttf", 24);
-                if (font == NULL) {
-                    fprintf(stderr, "error: font not found\n");
-                    exit(EXIT_FAILURE);
-                }
-            
-                SDL_Color Green = {0, 255, 0};
-
-                // as TTF_RenderText_Solid could only be used on
-                // SDL_Surface then you have to create the surface first
-                snprintf(level_str,20, "level", level);
-                SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, level_str, Green);
-                SDL_Texture* Message = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
-                
-                SDL_Rect Message_rect;
-                Message_rect.x = 100;  
-                Message_rect.y = 100; 
-                Message_rect.w = 250; 
-                Message_rect.h = 250;
-                SDL_RenderCopy(renderer, Message, NULL, &Message_rect);
-
-                TTF_CloseFont(font);
-                SDL_FreeSurface(surfaceMessage);
-                SDL_DestroyTexture(Message);
-
-    }
-*/
 void make_shadows(SDL_Renderer* renderer, SDL_Rect rect, char** labyrinth, int d, int i, int j, int x, int y){
 
     if (d > 1 && labyrinth[x][y] =='1'){
